@@ -104,17 +104,14 @@ const Home = () => {
           <thead>
             <tr>
               <th>Email</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {admin?.map((a) => (
               <tr key={a._id}>
                 <td>{a.email}</td>
-                <td>
-                <button className='btn btn-primary' style={{ marginRight: '10px', marginLeft: '-40px' }}>Edit</button>
-                <button className='btn btn-danger'>Delete</button>
-                </td>
+                
+          
               </tr>
             ))}
           </tbody>

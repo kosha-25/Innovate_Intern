@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "bootstrap-icons/font/bootstrap-icons.css"
 import { Outlet } from 'react-router-dom'
+import Approval from '../Components/Approval.jsx'
+
 const Admin = () => {
   return (
     <div className='container-fluid'>
@@ -40,12 +42,12 @@ const Admin = () => {
                <span className='ms-2 d-done d-sm-inline'>Manage Approvals</span></Link>
             </li>
 
-            <li className='w-100'>
+            {/* <li className='w-100'>
               <Link to="/adminlogin/approved-list"
               className='nav-link text-white px-0 align-middle'>
                <i className='fs-4 bi-people ms-2'></i>
                <span className='ms-2 d-done d-sm-inline'>Approve List</span></Link>
-            </li>
+            </li> */}
 
             <li className='w-100'>
               <Link to="/adminlogin/category"

@@ -195,37 +195,67 @@ router.get('/client/:id', async (req, res) => {
   }
 });
 
-router.put('/client/:id', async (req, res) => {
+router.get('/category/:id', async (req, res) => {
   const id = req.params.id;
-  const { name, email, salary, address, category } = req.body;
-
   try {
-    // Find the client by ID
-    const client = await Client.findById(id);
-
-    if (!client) {
-      return res.status(404).json({ success: false, message: 'Client not found' });
+    const category = await Category.findById(id);
+    if (!category) {
+      return res.status(404).send({ success: false, message: 'Category not found' });
     }
-
-    // Update client details
-    client.name = name || client.name;
-    client.email = email || client.email;
-    client.salary = salary || client.salary;
-    client.address = address || client.address;
-    client.category = category || client.category;
-    
-
-    // Save the updated client
-    await client.save();
-
-    res.status(200).json({ success: true, message: 'Client updated successfully', client });
+    res.status(200).json({ success: true, category });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ success: false, message: `Client Controller ${error.message}` });
+    res.status(500).send({ success: false, message: `Category Controller: ${error.message}` });
+  }
+});
+
+router.put('/category/:id', async (req, res) => {
+  const id = req.params.id;
+  const { name } = req.body;
+
+  try {
+    // Find the category by ID
+    const category = await Category.findById(id);
+
+    if (!category) {
+      return res.status(404).json({ success: false, message: 'Category not found' });
+    }
+
+    // Update category details
+    if (name) {
+      category.name = name;
+    }
+    
+    // Save the updated category
+    await category.save();
+
+    res.status(200).json({ success: true, message: 'Category updated successfully', category });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false, message: `Category Controller: ${error.message}` });
   }
 });
 
 
+
+
+router.put('/category/:id', async (req, res) => {
+  const id = req.params.id;
+  const { name } = req.body; // Assuming name is the property you want to update
+
+  try {
+    const category = await Category.findByIdAndUpdate(id, { name }, { new: true });
+
+    if (!category) {
+      return res.status(404).json({ success: false, message: 'Category not found' });
+    }
+
+    res.status(200).json({ success: true, message: 'Category updated successfully', category });
+  } catch (error) {
+    console.error('Error updating category:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
 
   router.delete('/deleteclient/:id', async (req, res) => {
     const clientId = req.params.id;
@@ -245,6 +275,27 @@ router.put('/client/:id', async (req, res) => {
     }
   });
 
+  router.delete('/deletecategory/:categoryId', async (req, res) => {
+    try {
+      const categoryId = req.params.categoryId;
+      console.log(`Attempting to delete category with ID: ${categoryId}`);
+  
+      const category = await Category.findByIdAndDelete(categoryId);
+  
+      if (!category) {
+        console.log('Category not found');
+        return res.status(404).json({ success: false, message: 'Category not found' });
+      }
+  
+      console.log('Category deleted successfully');
+      res.status(200).json({ success: true, message: 'Category deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting category:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+  });
+  
+  
   
 
 

@@ -5,6 +5,7 @@ import { message } from 'antd';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase.jsx';
 import { useState, useEffect } from 'react';
+
 const EditClient = () => {
     const {id} = useParams()
     const navigate = useNavigate()
@@ -42,14 +43,6 @@ const EditClient = () => {
           }).catch(err => console.log(err))
       }, []);
 
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     axios.put(`http"//localhost:5000/auth/client/${id}`, client)
-    //     .then(result => {
-    //         console.log(result.data)
-    //     }).catch(err => console.log(err.message))
-    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();

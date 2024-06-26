@@ -23,6 +23,8 @@ import ApplyRole from './Components/ApplyRole'
 import EditNewClient from './Components/EditNewClient'
 import Approval from './Components/Approval'
 import ApproveList from './Components/ApproveList'
+
+import CategoryForm from './Components/EditCategory'
 function App() {
  
   return (
@@ -51,7 +53,7 @@ function App() {
           <Route path="category" element={<Category />} />
           <Route path="addcategory" element={<AddCategory />} />
           <Route path="addclient" element={<AddClient />} />
-
+          <Route path='editcategory/:id' element={<CategoryForm/>}/>
           <Route path='editnewclient/:id' element={<EditNewClient/>}/>
           <Route path="profile" element={<Profile />} />
           <Route path="editclient/:id" element={<EditClient />} />
